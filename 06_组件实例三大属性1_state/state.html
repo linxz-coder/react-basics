@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state</title>
+</head>
+<body>
+    <!-- 必须准备好一个容器 -->
+    <div id="test"></div>
+    
+    <!-- 引入react核心库 -->
+     <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- text/babel表示里面不是js，而是jsx -->
+    <script type="text/babel"> 
+    // 1.创建组件
+    class Weather extends React.Component{
+        constructor(props){
+            // 调用父类的构造器
+            super(props)
+            // 初始化状态
+            this.state = {
+                isHot: true
+            }
+        }
+
+        render(){
+            console.log(this) // this指向Weather组件实例对象，因此this.state.isHot可以访问到
+            // 获取状态
+            const {isHot} = this.state // 解构赋值
+            return <h1 onClick={demo}>今天天气很{isHot?'炎热':'寒冷'}</h1>
+        }
+    }
+
+    // 渲染组件到页面
+    ReactDOM.render(<Weather/>, document.getElementById('test'))
+
+    function demo(){
+            alert('按钮3被点击了')
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_类的基本知识</title>
+</head>
+<body>
+    <!-- 必须准备好一个容器 -->
+    <div id="test"></div>
+    
+    <!-- 引入react核心库 -->
+     <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- text/babel表示里面不是js，而是jsx -->
+    <script type="text/javascript"> 
+        /* 
+        总结
+        1. 类中的构造器不是必须写的，要对实例进行一些初始化操作时，如添加指定属性，才写构造器
+        2. 如果A类继承了B类，那么在A类的构造器中必顶调用super()，super()是B类的构造器。
+        3. 类中所定义的方法，都是放在类的原型对象上的，供实例对象调用
+        */
+
+        // 创建一个Person类
+        class Person {
+            // 构造器
+            constructor(name, age) {
+                // 构造器中的this是谁？——类的实例对象上
+                this.name = name
+                this.age = age
+            }
+            // 一般方法
+            speak(){
+                // speak方法放在了哪里？——类的原型对象上，供实例使用
+                // 通过Person实例调用speak方法时，speak方法中的this是谁？——实例对象
+                console.log(`我叫${this.name}，年龄是${this.age}`)
+            }
+
+        }
+
+
+        // 创建一个Person类的实例
+        const p1 = new Person('Tom', 18)
+        // const p2 = new Person('Jerry', 20)
+        // p1.speak()
+        // p2.speak()
+        // p1.speak.call({a:1,b:2}) //call方法可以改变this指向
+
+        console.log(p1)
+        // console.log(p2)
+
+        // 创建一个Student类，继承自Person类
+        class Student extends Person{
+            constructor(name, age, grade){
+                // 调用父类的构造器
+                super(name, age) //super()必须在this之前调用
+                this.grade = grade
+            }
+            // 重写父类的speak方法
+            speak(){
+                console.log(`我叫${this.name}，年龄是${this.age}，在读${this.grade}`)
+            }
+            study(){
+                 // study方法放在了哪里？——类的原型对象上，供实例使用
+                // 通过Person实例调用study方法时，study方法中的this是谁？——Student的实例对象
+                console.log('我在学习')
+            }
+        }
+        const s1 = new Student('Jack', 22, '高一')
+        console.log(s1)
+        s1.speak()
+        s1.study()
+
+        
+    </script>
+</body>
+</html>
