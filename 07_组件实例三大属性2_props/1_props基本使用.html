@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_函数式组件</title>
+</head>
+<body>
+    <!-- 必须准备好一个容器 -->
+    <div id="test"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    
+    <!-- 引入react核心库 -->
+     <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- text/babel表示里面不是js，而是jsx -->
+    <script type="text/babel"> 
+        // 创建组件
+        class Person extends React.Component{
+            render(){
+                console.log(this)
+                const{name,age,sex}=this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age}</li>
+                    </ul>
+                )
+            }
+        }
+
+        // 渲染组件到页面
+        ReactDOM.render(<Person name="Tom" sex="女" age="18" />, document.getElementById('test'))
+        ReactDOM.render(<Person name="Jack" sex="男" age="17" />, document.getElementById('test2'))
+        ReactDOM.render(<Person name="Elaine" sex="女" age="28" />, document.getElementById('test3'))
+    </script>
+</body>
+</html>
