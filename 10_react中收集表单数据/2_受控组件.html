@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 移动端适配的 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_受控组件</title>
+</head>
+<body>
+    <!-- 必须准备好一个容器 -->
+    <div id="test"></div>
+    
+    <!-- 引入react核心库 -->
+     <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+     <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <!-- text/babel表示里面不是js，而是jsx -->
+    <script type="text/babel"> 
+        // 创建组件
+        class Login extends React.Component{
+            // 初始化状态
+            state = {
+                username: '',
+                password: ''
+            }
+            
+            // 保存用户名到状态中
+            saveUsername = (e) => {
+                // console.log(e.target.value);
+                this.setState({
+                    username: e.target.value
+                })
+            }
+
+            // 保存密码到状态中
+            savePassword = (e) => {
+                // console.log(e.target.value);
+                this.setState({
+                    password: e.target.value
+                })
+            }
+            
+            handleSubmit = (event) => {
+                // 阻止默认事件
+                event.preventDefault(); //阻止表单提交
+                // 获取用户名和密码
+                const {username, password} = this.state;
+                alert(`用户名：${username}，密码：${password}`);
+            }
+
+            render(){
+                return(
+                    <form action="https://linxiaozhong.cn" onSubmit={this.handleSubmit}>
+                        用户名：<input onChange={this.saveUsername} type="text" name="username"/>
+                        密码：  <input onChange={this.savePassword} type="password" name="password" />
+                        <button type="submit">登录</button>
+                    </form>
+                )
+            }
+        }
+
+        // 渲染组件
+        ReactDOM.render(<Login />, document.getElementById('test'));
+    </script>
+</body>
+</html>
